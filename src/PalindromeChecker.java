@@ -1,32 +1,31 @@
 class PalindromeCheckerApp {
 
-    // Recursive method to check palindrome
-    public static boolean isPalindrome(String word, int start, int end) {
-
-        // Base condition
-        if (start >= end) {
-            return true;
-        }
-
-        // If characters do not match
-        if (word.charAt(start) != word.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call
-        return isPalindrome(word, start + 1, end - 1);
-    }
-
     public static void main(String[] args) {
 
-        String word = "madam";
+        // Original string with spaces and mixed case
+        String word = "Madam In Eden Im Adam";
 
-        // Call recursive function
-        boolean result = isPalindrome(word, 0, word.length() - 1);
+        // Normalize string: remove spaces and convert to lowercase
+        String normalized = word.replaceAll("\\s+", "").toLowerCase();
+
+        boolean isPalindrome = true;
+
+        int start = 0;
+        int end = normalized.length() - 1;
+
+        // Check palindrome
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
 
         // Print result
-        if (result) {
-            System.out.println("The string '" + word + "' is a palindrome.");
+        if (isPalindrome) {
+            System.out.println("The string '" + word + "' is a palindrome (ignoring spaces and case).");
         } else {
             System.out.println("The string '" + word + "' is not a palindrome.");
         }
