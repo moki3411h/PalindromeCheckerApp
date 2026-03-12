@@ -1,5 +1,5 @@
-import java.util.Stack;
-
+import java.util.Deque;
+import java.util.ArrayDeque;
 class PalindromeCheckerApp {
 
     public static void main(String[] args) {
@@ -7,27 +7,32 @@ class PalindromeCheckerApp {
         // Original string
         String word = "madam";
 
-        // Create a stack
-        Stack<Character> stack = new Stack<>();
+        // Create a deque
+        Deque<Character> deque = new ArrayDeque<>();
 
-        // Push each character into the stack
+        // Insert characters into deque
         for (int i = 0; i < word.length(); i++) {
-            stack.push(word.charAt(i));
+            deque.addLast(word.charAt(i));
         }
 
-        // Build reversed string by popping from stack
-        String reversed = "";
+        boolean isPalindrome = true;
 
-        while (!stack.isEmpty()) {
-            reversed = reversed + stack.pop();
+        // Compare first and last characters
+        while (deque.size() > 1) {
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        // Compare original and reversed
-        if (word.equals(reversed)) {
+        // Print result
+        if (isPalindrome) {
             System.out.println("The string '" + word + "' is a palindrome.");
         } else {
             System.out.println("The string '" + word + "' is not a palindrome.");
         }
-
     }
 }
